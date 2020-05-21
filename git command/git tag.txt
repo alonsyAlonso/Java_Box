@@ -1,2 +1,2 @@
-1.gitlab£ºÕÒµ½createNewTag
-2.ÓÃÃüÁî£ºgit tag -a tagName -m ""  git push origin --tagName
+1.gitlabï¼šæ‰¾åˆ°createNewTag
+2.ç”¨å‘½ä»¤ï¼šgit tag -a tagName -m ""  git push origin --tagName
