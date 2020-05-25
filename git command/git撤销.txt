@@ -1,0 +1,1 @@
+撤销commit,repository->ResetHead->Head变为Head^撤销一次提交

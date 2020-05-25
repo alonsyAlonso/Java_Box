@@ -2,6 +2,3 @@
 2.用命令：
   git tag -a tagName -m ""  //创建tag
   git push origin --tagName //push
-
-
-3.撤销commit,repository->ResetHead->Head变为Head^撤销一次提交
