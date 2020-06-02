@@ -1,0 +1,41 @@
+public void diverDailyBatchExport(OperatorAttendanceDailyDetailForm form, HttpServletResponse response) {
+        //最大支持导出5K --->暂时闲置5K，后期方便修改
+        List<DriverDetailExportVo> list = exportList(form);
+
+        //excel导出
+        String fileName = "司机考勤日报";
+        String sheetName = "Sheet1";
+        EasyExcelUtil.writeExcel(response, list, fileName, sheetName, new DriverDetailExportVo());
+}
+
+private List<DriverDetailExportVo> exportList(OperatorAttendanceDailyDetailForm form) {
+        if (null == form) {
+            return new ArrayList<>();
+        }
+
+        // 获取导出list
+        int pageNo = Constants.EXPORT_START_PAGE;
+        form.setPageSize(Constants.EXPORT_PAGE_SIZE);
+        Response<PageResult<OperatorAttendanceDailyDetailDto>> pageResultResponse = iDutyDetailDsInfoService.queryPage(form);
+        PageResult<OperatorAttendanceDailyDetailDto> pageResult = parseDataResponse(pageResultResponse);
+        List<DriverDetailExportVo> list = new ArrayList<>();
+        setExportList(list, pageResult.getList());
+
+        // 循环添加
+        while (pageResult.isHasMore()) {
+            //防止死循环，最多查询5页
+            if (pageNo > Constants.EXPORT_MAX_PAGE) {
+                log.info("运营平台-日报导出-获取所有数据，查询页数超过最大值（{}）", Constants.EXPORT_MAX_PAGE);
+                break;
+            }
+            pageNo++;
+            pageResult = parseResponse(iDutyDetailDsInfoService.queryPage(form));
+            if (null == pageResult) {
+                log.error("行驶证service-获取所有数据，调用中台获取第{}页数据为null", pageNo);
+                break;
+            }
+            setExportList(list, pageResult.getList());
+        }
+
+        return list;
+    }

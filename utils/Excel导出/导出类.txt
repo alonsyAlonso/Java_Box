@@ -1,0 +1,38 @@
+@Data
+@ApiModel("导出类")
+public class DriverDetailExportVo extends BaseRowModel {
+
+    @ExcelProperty(value = "日期", index = 0, format = "yyyy-MM-dd")
+    private String dutyDate;
+
+    @ExcelProperty(value = "排班名称", index = 1)
+    private String shiftName;
+
+    @ExcelProperty(value = "排班类型", index = 2)
+    private String shiftType;
+
+    @ExcelProperty(value = "司机ID", index = 3)
+    private String driverNo;
+
+    @ExcelProperty(value = "司机姓名", index = 4)
+    private String driverName;
+
+    @ExcelProperty(value = "司机手机号", index = 5)
+    private String driverPhone;
+
+    @ExcelProperty(value = "车牌号", index = 6)
+    private String plateNum;
+
+    @ExcelProperty(value = "类型", index = 7)
+    private String dutyType;
+
+    @ExcelProperty(value = "在线时长", index = 8)
+    private String onlineTime;
+
+    @ExcelProperty(value = "高峰时长", index = 9)
+    private String peakTime;
+
+    @ExcelProperty(value = "计费时长", index = 10)
+    private String chargeTime;
+
+}
