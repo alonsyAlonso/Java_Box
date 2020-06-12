@@ -1,4 +1,4 @@
 1.gitlab：找到createNewTag
 2.用命令：
   git tag -a tagName -m ""  //创建tag
-  git push origin --tagName //push
+  git push origin tagName //push
